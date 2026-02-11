@@ -22,7 +22,7 @@ const { prodotto } = Astro.props;
         <div class="main-frame">
            <div class="tech-marker">IMG_01 // FRONT</div>
            <img 
-             src={`/${prodotto.img_fronte}`} 
+             src={`${prodotto.img_fronte}`} 
              alt="Vista Frontale" 
              transition:name={`immagine-${prodotto.id}`} 
            />
@@ -31,7 +31,7 @@ const { prodotto } = Astro.props;
         <div class="secondary-frame">
             <div class="tech-marker">IMG_02 // BACK_DETAIL</div>
             <img 
-              src={`/${prodotto.img_retro}`} 
+              src={`${prodotto.img_retro}`} 
               alt="Vista Retro" 
             />
         </div>
