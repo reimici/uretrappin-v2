@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/cart.css';
+---
+
+<BaseLayout titolo="Il tuo Carrello">
+  <div class="layout-container">
+    <main class="cart-page">
+      
+      <h1 class="glitch-title">ORDER_SUMMARY</h1>
+      
+      <div id="cart-items-container" class="cart-list">
+        <p class="loading-text">CALCULATING DRIP...</p>
+      </div>
+
+      <div class="cart-footer" id="cart-footer" style="display: none;">
+        <div class="total-row">
+            <span>TOTAL:</span>
+            <span id="cart-total-price" class="neon-text">€ 0.00</span>
+        </div>
+        
+        <div class="action-buttons">
+            <button id="clear-cart-btn" class="cyber-btn warning">
+                SVUOTA CARRELLO
+            </button>
+            <button class="cyber-btn">
+                PROCEDI AL CHECKOUT
+            </button>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</BaseLayout>
+
+<script src="../scripts/cartLogic.js"></script>
