@@ -17,6 +17,7 @@ console.log("Prodotti caricati:", prodotti);
             <img 
               src={`${prodotto.img_fronte}`} 
               alt={prodotto.nome} 
+			  transition:name={`immagine-${prodotto.id}`}
             />
             
             <h3>{prodotto.nome}</h3>

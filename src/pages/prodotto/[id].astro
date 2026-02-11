@@ -17,7 +17,8 @@ const { prodotto } = Astro.props;
 <BaseLayout titolo={prodotto.nome}>
   <div class="scheda-prodotto">
      <div class="trap-gallery">
-        <img src={`/${prodotto.img_fronte}`} alt="Front" />
+        <img src={`/${prodotto.img_fronte}`} alt="Front"
+                    transition:name={`immagine-${prodotto.id}`} />
         <img src={`/${prodotto.img_retro}`} alt="Back" />
      </div>
      
