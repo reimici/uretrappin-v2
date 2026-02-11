@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import '../styles/header.css';
 import { ClientRouter } from 'astro:transitions'; 
 const { titolo } = Astro.props;
 ---
@@ -13,10 +14,18 @@ const { titolo } = Astro.props;
   </head>
   <body>
     <header class="site-header">
-       <a href="/" class="back-link">● BASE OPERATIONS ●</a>
+       <div class="header-content">
+           <a href="/" class="back-link">● BASE OPERATIONS ●</a>
+           
+           <a href="/carrello" class="cart-widget">
+              CART [<span id="cart-count">0</span>]
+           </a>
+       </div>
     </header>
 
     <slot />
     
+    <script src="../scripts/cartWidget.js"></script>
+
   </body>
 </html>

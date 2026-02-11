@@ -1,9 +1,8 @@
 ---
-import '/src/styles/detail.css';
 import prodotti from '../../data/prodotti.json';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import '../../styles/product.css';
 
-// 1. Generazione dei percorsi statici (Standard Astro)
 export function getStaticPaths() {
   return prodotti.map((p) => ({
     params: { id: p.id.toString() },
@@ -20,11 +19,10 @@ const { prodotto } = Astro.props;
     <div class="product-split">
       
       <div class="gallery-section">
-        
         <div class="main-frame">
            <div class="tech-marker">IMG_01 // FRONT</div>
            <img 
-             src={`${prodotto.img_fronte}`} 
+             src={`/${prodotto.img_fronte}`} 
              alt="Vista Frontale" 
              transition:name={`immagine-${prodotto.id}`} 
            />
@@ -33,11 +31,10 @@ const { prodotto } = Astro.props;
         <div class="secondary-frame">
             <div class="tech-marker">IMG_02 // BACK_DETAIL</div>
             <img 
-              src={`${prodotto.img_retro}`} 
+              src={`/${prodotto.img_retro}`} 
               alt="Vista Retro" 
             />
         </div>
-
       </div>
 
       <div class="data-panel">
@@ -50,7 +47,6 @@ const { prodotto } = Astro.props;
 
         <div class="panel-body">
            <p class="description">{prodotto.descrizione}</p>
-           
            <ul class="tech-specs">
               <li>MATERIAL: <span>100% COTTON_HVY</span></li>
               <li>FIT: <span>OVERSIZE_BOX</span></li>
@@ -59,15 +55,16 @@ const { prodotto } = Astro.props;
         </div>
 
         <div class="panel-footer">
-           <button class="cyber-btn">
+           <button class="cyber-btn" id="add-btn" data-id={prodotto.id}>
               <span>AGGIUNGI AL CARRELLO</span>
               <div class="glitch-effect"></div>
            </button>
         </div>
 
       </div>
-
     </div>
   </div>
 
 </BaseLayout>
+
+<script src="../../scripts/addToCart.js"></script>

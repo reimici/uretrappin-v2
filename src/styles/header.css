@@ -1,0 +1,25 @@
+/* Aggiungi questo stile per l'header */
+.header-content {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-widget {
+    font-family: var(--font-code);
+    color: var(--c-neon-green);
+    border: 1px solid var(--c-neon-green);
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.cart-widget:hover, .cart-widget.updated {
+    background: var(--c-neon-green);
+    color: var(--c-void);
+    box-shadow: 0 0 15px var(--c-neon-green);
+}
