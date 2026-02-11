@@ -1,362 +1,175 @@
 /* =========================================
-   1. SETUP & VARIABILI
+   1. SYSTEM & VARIABLES (Design Tokens)
    ========================================= */
-
-   @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap');
+   @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap');
 
    :root {
-       /* Palette Colori Trap */
-       --neon-green: #39ff14;
-       --neon-purple: #bc13fe;
-       --dark-bg: #050505;
-       --glass-bg: rgba(10, 10, 10, 0.85);
-       --text-main: #ffffff;
-       --text-muted: #aaaaaa;
+       /* Trap Palette 2.0 */
+       --c-neon-green: #39ff14;
+       --c-neon-purple: #bc13fe;
+       --c-void: #050505;
+       --c-charcoal: #111111;
+       --c-text: #ffffff;
+       --c-muted: #888888;
    
-       /* Font */
-       --font-title: 'Oswald', sans-serif;
-       --font-tech: 'Roboto Mono', monospace;
-   }
-   
-  /* =========================================
-   2. RESET & BASE (MODIFICATO)
-   ========================================= */
-
-* {
-    box-sizing: border-box;
-}
-
-body {
-    font-family: var(--font-tech);
-    margin: 0;
-    padding: 0;
-    color: var(--text-main);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    overflow-x: hidden;
-
-    /* --- FIX LUMINOSITÀ SFONDO --- */
-    background-color: #0a0a0a; /* Un grigio molto scuro, non nero assoluto */
-    
-    background-image: 
-        /* 1. Vignettatura più morbida (non copre tutto) */
-        radial-gradient(circle at 50% 50%, transparent 0%, rgba(0,0,0,0.7) 100%),
-        /* 2. Griglia Verticale MOLTO più visibile (0.15 opacità) */
-        linear-gradient(90deg, rgba(55, 255, 20, 0.466) 1px, transparent 1px),
-        /* 3. Griglia Orizzontale */
-        linear-gradient(rgba(57, 255, 20, 0.15) 1px, transparent 1px);
-
-    /* Dimensione quadrati un po' più grande */
-    background-size: 100% 100%, 50px 50px, 50px 50px;
-    
-    background-attachment: fixed;
-    background-position: center;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-    transition: all 0.3s ease;
-}
-
-   /* =========================================
-      4. LAYOUT PRINCIPALE & HEADER
-      ========================================= */
-   
-   #scrollable-content {
-       position: relative;
-       z-index: 1;
-       width: 100%;
-       min-height: 100vh;
-       display: flex;
-       flex-direction: column;
-       align-items: center;
-   }
-   
-   header {
-       padding: 60px 20px;
-       text-align: center;
-       width: 100%;
-       background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
-   }
-   
-   header a {
-       font-size: 0.9rem;
-       color: var(--text-muted);
-       border-bottom: 1px solid transparent;
-   }
-   
-   header a:hover {
-       color: #fff;
-       border-color: #fff;
-   }
-   
-   /* --- IL FIX È QUI SOTTO --- */
-   main {
-       padding: 20px;
-       width: 100%;
-       max-width: 1200px;
-       margin: 0 auto; /* <--- QUESTO CENTRA IL BLOCCO NELLA PAGINA */
-   }
-   
-   /* =========================================
-      5. TIPOGRAFIA & GLITCH FX
-      ========================================= */
-   
-   h1.glitch {
-       font-family: var(--font-title);
-       font-size: 3.5rem;
-       font-weight: 700;
-       position: relative;
-       color: #fff;
-       letter-spacing: 4px;
-       margin: 0;
-       text-shadow: 2px 2px 0px var(--neon-purple);
-       line-height: 1.2;
-   }
-   
-   h1.glitch::before, h1.glitch::after {
-       content: attr(data-text);
-       position: absolute;
-       top: 0;
-       left: 0;
-       width: 100%;
-       height: 100%;
-       background: transparent;
-   }
-   
-   h1.glitch::before {
-       left: 2px;
-       text-shadow: -1px 0 #ff00c1;
-       clip: rect(44px, 450px, 56px, 0);
-       animation: glitch-anim 5s infinite linear alternate-reverse;
-   }
-   
-   h1.glitch::after {
-       left: -2px;
-       text-shadow: -1px 0 var(--neon-green);
-       clip: rect(44px, 450px, 56px, 0);
-       animation: glitch-anim-2 5s infinite linear alternate-reverse;
-   }
-   
-   h2 {
-       text-align: center;
-       font-family: var(--font-title);
-       font-size: 2rem;
-       margin-bottom: 40px;
-       color: #fff;
-       text-shadow: 2px 2px 0px #000;
-   }
-   
-   /* =========================================
-      6. VETRINA PRODOTTI (HOME)
-      ========================================= */
-   
-   .vetrina {
-       display: grid;
-       grid-template-columns: 1fr;
-       gap: 40px;
-       width: 100%;
-   }
-   
-   .prodotto-anteprima {
-    background-color: #ffffff1a;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    
-    /* PADDING RIDOTTO: Era 20px, passiamo a 15px */
-    padding: 15px; 
-    
-    text-align: center;
-    position: relative;
-    transition: all 0.3s ease;
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
-}
-
-.prodotto-anteprima h3 {
-    font-family: var(--font-title);
-    
-    /* FONT RIDOTTO: Era 1.5rem, passiamo a 1.2rem */
-    font-size: 1.2rem; 
-    
-    margin: 10px 0 5px 0;
-    color: #fff;
-}
-   
-   .prodotto-anteprima img {
-       max-width: 100%;
-       height: auto;
-       filter: grayscale(100%) contrast(1.1);
-       transition: 0.3s ease;
-   }
-   
-   .prodotto-anteprima:hover img {
-       filter: grayscale(0%) contrast(1.1) drop-shadow(0 0 8px var(--neon-purple));
-       transform: scale(1.05);
-   }
-   
-   .prodotto-anteprima h3 {
-       font-family: var(--font-title);
-       font-size: 1.5rem;
-       margin: 15px 0 5px 0;
-       color: #fff;
-   }
-   
-   .prodotto-anteprima:hover h3 {
-       color: var(--neon-green);
-   }
-   
-   .prodotto-anteprima p {
-       font-size: 1rem;
-       color: var(--text-muted);
-       border: 1px solid #333;
-       display: inline-block;
-       padding: 5px 10px;
-   }
-   
-   /* =========================================
-      7. PAGINA PRODOTTO (DETTAGLIO)
-      ========================================= */
-   
-   .scheda-prodotto {
-       display: flex;
-       flex-direction: column;
-       gap: 40px;
-       align-items: center;
-       width: 100%;
-   }
-   
-   .trap-gallery {
-       display: flex;
-       flex-direction: column;
-       gap: 20px;
-       width: 100%;
-       /* Assicura che su mobile sia centrato */
-       justify-content: center; 
-       align-items: center;
-   }
-   
-   .lato-img {
-       position: relative;
-       width: 100%;
-       border: 1px solid rgba(255, 255, 255, 0.1);
-       background: #ffffff1c;
-       padding: 10px;
-   }
-   
-   .lato-img img {
-       width: 100%;
-       height: auto;
-       display: block;
-   }
-   
-   .label-neon {
-       position: absolute;
-       top: 10px;
-       left: 10px;
-       background-color: var(--dark-bg);
-       color: var(--neon-green);
-       font-family: var(--font-tech);
-       font-size: 0.75rem;
-       padding: 2px 6px;
-       border: 1px solid var(--neon-green);
-       z-index: 2;
-       pointer-events: none;
-   }
-   
-   .trap-info {
-       width: 100%;
-       max-width: 800px;
-       background: rgba(0,0,0,0.85);
-       padding: 30px;
-       border: 1px solid var(--neon-purple);
-       box-shadow: 0 0 15px rgba(188, 19, 254, 0.15);
-       text-align: center;
-       /* Assicurati che anche questo sia centrato nella pagina */
-       margin: 0 auto;
-   }
-   
-   .trap-info h2 {
-       color: #fff;
-       margin-top: 0;
-       text-shadow: 0 0 5px var(--neon-purple);
-   }
-   
-   .desc-text {
-       font-size: 1rem;
-       color: #ccc;
-       line-height: 1.6;
-   }
-   
-   .prezzo {
-       font-size: 2.2rem;
-       font-family: var(--font-title);
-       color: var(--neon-green);
-       margin: 20px 0;
-   }
-   
-   .buy-btn {
-       background: transparent;
-       border: 2px solid #fff;
-       color: #fff;
-       padding: 15px 50px;
-       font-family: var(--font-title);
-       font-size: 1.2rem;
-       text-transform: uppercase;
-       cursor: pointer;
-       transition: 0.2s;
-   }
-   
-   .buy-btn:hover {
-       background: #fff;
-       color: #000;
-       box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
-       transform: scale(1.05);
-   }
-   
-   /* =========================================
-      8. ANIMAZIONI
-      ========================================= */
-   
-   @keyframes glitch-anim {
-       0% { clip: rect(31px, 9999px, 94px, 0); transform: skew(0.85deg); }
-       5% { clip: rect(70px, 9999px, 11px, 0); transform: skew(0.04deg); }
-       10% { clip: rect(27px, 9999px, 96px, 0); transform: skew(0.24deg); }
-       15% { clip: rect(1px, 9999px, 86px, 0); transform: skew(0.58deg); }
-       20% { clip: rect(87px, 9999px, 96px, 0); transform: skew(0.82deg); }
-       25% { clip: rect(44px, 9999px, 9px, 0); transform: skew(0.32deg); }
-       100% { clip: rect(66px, 9999px, 30px, 0); transform: skew(0.79deg); }
-   }
-   
-   @keyframes glitch-anim-2 {
-       0% { clip: rect(65px, 9999px, 100px, 0); transform: skew(0.3deg); }
-       5% { clip: rect(5px, 9999px, 54px, 0); transform: skew(0.1deg); }
-       10% { clip: rect(88px, 9999px, 12px, 0); transform: skew(0.7deg); }
-       100% { clip: rect(12px, 9999px, 67px, 0); transform: skew(0.2deg); }
-   }
-   
-   /* =========================================
-      9. MEDIA QUERY (DESKTOP)
-      ========================================= */
-   
-   @media (min-width: 769px) {
-    .vetrina {
-        /* Passiamo da 2 a 3 colonne -> Box più piccoli automaticamente */
-        grid-template-columns: repeat(3, 1fr); 
-        gap: 30px; /* Riduciamo un po' lo spazio tra i box (era 40px) */
-    }
+       /* Effects */
+       --glass-surface: rgba(255, 255, 255, 0.03);
+       --glass-border: rgba(255, 255, 255, 0.1);
+       --glow-shadow: 0 0 20px rgba(57, 255, 20, 0.3);
        
-       h1.glitch {
-           font-size: 5rem;
-       }
+       /* Typography */
+       --font-display: 'Oswald', sans-serif;
+       --font-code: 'JetBrains Mono', monospace;
+   }
    
-       .trap-gallery {
-           flex-direction: row;
-           justify-content: center; /* Centra orizzontalmente i figli */
-           align-items: flex-start;
-           gap: 30px;
-       }
+   /* =========================================
+      2. RESET & BASE
+      ========================================= */
+   *, *::before, *::after {
+       box-sizing: border-box;
+       margin: 0;
+       padding: 0;
+   }
    
-       .lato-img {
-           width: 45%; 
-       }
+   body {
+       background-color: var(--c-void);
+       color: var(--c-text);
+       font-family: var(--font-code);
+       overflow-x: hidden;
+       min-height: 100vh;
+       
+       /* Sfondo Tecnico con Griglia */
+       background-image: 
+           linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+           linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+       background-size: 50px 50px;
+       background-position: center top;
+   }
+   
+   a { text-decoration: none; color: inherit; }
+   ul { list-style: none; }
+   
+   /* =========================================
+      3. COMPONENTS
+      ========================================= */
+   
+   /* Container Fluido */
+   .layout-container {
+       width: 100%;
+       max-width: 1400px;
+       margin: 0 auto;
+       padding: 0 20px;
+   }
+   
+   /* Header Minimal */
+   .site-header {
+       padding: 2rem 0;
+       display: flex;
+       justify-content: center;
+       border-bottom: 1px solid var(--glass-border);
+       margin-bottom: 4rem;
+   }
+   
+   .back-link {
+       font-size: 0.9rem;
+       color: var(--c-muted);
+       text-transform: uppercase;
+       letter-spacing: 2px;
+       transition: color 0.3s ease;
+   }
+   .back-link:hover { color: var(--c-neon-green); }
+   
+   /* Hero Title - Scalabile */
+   .hero-title {
+       font-family: var(--font-display);
+       /* Clamp: Minimo 3rem, Ideale 10vw, Massimo 8rem */
+       font-size: clamp(3rem, 10vw, 8rem); 
+       text-align: center;
+       text-transform: uppercase;
+       line-height: 0.9;
+       margin-bottom: 4rem;
+       position: relative;
+       color: transparent;
+       -webkit-text-stroke: 2px var(--c-text); /* Outline Text Style */
+       letter-spacing: -2px;
+   }
+   
+   /* Effetto Glitch solo sull'hover o attivo */
+   .hero-title span {
+       display: block;
+       color: var(--c-text);
+       -webkit-text-stroke: 0;
+       text-shadow: 4px 4px 0px var(--c-neon-purple);
+   }
+   
+   /* Grid System per i prodotti */
+   .product-grid {
+       display: grid;
+       /* Auto-fit: crea colonne finché c'è spazio, minimo 300px */
+       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+       gap: 2rem;
+       padding-bottom: 4rem;
+   }
+   
+   /* Card Prodotto - Glassmorphism */
+   .product-card {
+       position: relative;
+       background: var(--glass-surface);
+       border: 1px solid var(--glass-border);
+       backdrop-filter: blur(10px); /* L'effetto vetro reale */
+       padding: 1.5rem;
+       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+       overflow: hidden;
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       text-align: center;
+   }
+   
+   .product-card:hover {
+       transform: translateY(-10px);
+       border-color: var(--c-neon-green);
+       box-shadow: var(--glow-shadow);
+   }
+   
+   /* Immagine */
+   .product-image-container {
+       width: 100%;
+       aspect-ratio: 1 / 1; /* Mantiene sempre il quadrato */
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       margin-bottom: 1.5rem;
+       background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+   }
+   
+   .product-card img {
+       width: 100%;
+       height: auto;
+       max-height: 100%;
+       object-fit: contain;
+       filter: grayscale(100%);
+       transition: filter 0.3s ease, transform 0.3s ease;
+   }
+   
+   .product-card:hover img {
+       filter: grayscale(0%);
+       transform: scale(1.1);
+   }
+   
+   /* Info Prodotto */
+   .product-info h3 {
+       font-family: var(--font-display);
+       font-size: 1.5rem;
+       text-transform: uppercase;
+       margin-bottom: 0.5rem;
+       letter-spacing: 1px;
+   }
+   
+   .product-price {
+       color: var(--c-neon-green);
+       font-weight: bold;
+       font-size: 1.2rem;
+       display: block;
+       margin-top: 0.5rem;
    }

@@ -1,8 +1,9 @@
 ---
+import '/src/styles/detail.css';
 import prodotti from '../../data/prodotti.json';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-// Funzione Magica: Dice al framework quante pagine generare basandosi sul JSON
+// 1. Generazione dei percorsi statici (Standard Astro)
 export function getStaticPaths() {
   return prodotti.map((p) => ({
     params: { id: p.id.toString() },
@@ -10,22 +11,63 @@ export function getStaticPaths() {
   }));
 }
 
-// Recuperiamo i dati del singolo prodotto passato dalla funzione sopra
 const { prodotto } = Astro.props;
 ---
 
 <BaseLayout titolo={prodotto.nome}>
-  <div class="scheda-prodotto">
-     <div class="trap-gallery">
-        <img src={`${prodotto.img_fronte}`} alt="Front"
-                    transition:name={`immagine-${prodotto.id}`} />
-        <img src={`${prodotto.img_retro}`} alt="Back" />
-     </div>
-     
-     <div class="trap-info">
-        <h2>{prodotto.nome}</h2>
-        <p>{prodotto.descrizione}</p>
-        <p class="prezzo">€ {prodotto.prezzo}</p>
-     </div>
+  
+  <div class="layout-container">
+    <div class="product-split">
+      
+      <div class="gallery-section">
+        
+        <div class="main-frame">
+           <div class="tech-marker">IMG_01 // FRONT</div>
+           <img 
+             src={`${prodotto.img_fronte}`} 
+             alt="Vista Frontale" 
+             transition:name={`immagine-${prodotto.id}`} 
+           />
+        </div>
+
+        <div class="secondary-frame">
+            <div class="tech-marker">IMG_02 // BACK_DETAIL</div>
+            <img 
+              src={`${prodotto.img_retro}`} 
+              alt="Vista Retro" 
+            />
+        </div>
+
+      </div>
+
+      <div class="data-panel">
+        
+        <div class="panel-header">
+           <span class="id-badge">ITEM_#{prodotto.id.toString().padStart(3, '0')}</span>
+           <h1 class="product-title">{prodotto.nome}</h1>
+           <div class="price-tag">€ {prodotto.prezzo}</div>
+        </div>
+
+        <div class="panel-body">
+           <p class="description">{prodotto.descrizione}</p>
+           
+           <ul class="tech-specs">
+              <li>MATERIAL: <span>100% COTTON_HVY</span></li>
+              <li>FIT: <span>OVERSIZE_BOX</span></li>
+              <li>ORIGIN: <span>ITALY_LAB</span></li>
+           </ul>
+        </div>
+
+        <div class="panel-footer">
+           <button class="cyber-btn">
+              <span>AGGIUNGI AL CARRELLO</span>
+              <div class="glitch-effect"></div>
+           </button>
+        </div>
+
+      </div>
+
+    </div>
   </div>
+
 </BaseLayout>

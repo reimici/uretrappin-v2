@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { ClientRouter } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions'; 
 const { titolo } = Astro.props;
 ---
 <html lang="it">
@@ -9,15 +9,14 @@ const { titolo } = Astro.props;
     <title>{titolo} | U'RETRAPPIN'</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/images/favicon.png" type="image/png">
+    <ClientRouter />
   </head>
   <body>
-    <div id="scrollable-content">
-      <header>
-         <a href="/">← TORNA ALLA BASE</a>
-      </header>
+    <header class="site-header">
+       <a href="/" class="back-link">● BASE OPERATIONS ●</a>
+    </header>
 
-      <slot />  
-
-    </div>
+    <slot />
+    
   </body>
 </html>

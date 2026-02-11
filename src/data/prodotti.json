@@ -20,7 +20,7 @@
         "nome": "GLITCH TEE",
         "prezzo": "29.90",
         "descrizione": "T-shirt basica ma con vibes illegali.",
-        "img_fronte": "/images/capo1_principale.png",
-        "img_retro": "/images/capo1_dettaglio.png"
+        "img_fronte": "/images/capo3_principale.png",
+        "img_retro": "/images/capo3_dettaglio.png"
     }
 ]
