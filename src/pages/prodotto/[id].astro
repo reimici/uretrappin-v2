@@ -1,0 +1,30 @@
+---
+import prodotti from '../../data/prodotti.json';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// Funzione Magica: Dice al framework quante pagine generare basandosi sul JSON
+export function getStaticPaths() {
+  return prodotti.map((p) => ({
+    params: { id: p.id.toString() },
+    props: { prodotto: p },
+  }));
+}
+
+// Recuperiamo i dati del singolo prodotto passato dalla funzione sopra
+const { prodotto } = Astro.props;
+---
+
+<BaseLayout titolo={prodotto.nome}>
+  <div class="scheda-prodotto">
+     <div class="trap-gallery">
+        <img src={`/${prodotto.img_fronte}`} alt="Front" />
+        <img src={`/${prodotto.img_retro}`} alt="Back" />
+     </div>
+     
+     <div class="trap-info">
+        <h2>{prodotto.nome}</h2>
+        <p>{prodotto.descrizione}</p>
+        <p class="prezzo">€ {prodotto.prezzo}</p>
+     </div>
+  </div>
+</BaseLayout>

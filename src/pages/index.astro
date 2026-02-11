@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import prodotti from '../data/prodotti.json';
+
+// DEBUGGING:
+console.log("Prodotti caricati:", prodotti); 
+---
+
+<BaseLayout titolo="Official Store">
+  <h1 style="color: red;">TEST VISIBILITÀ</h1> 
+
+  <div class="vetrina">
+    {prodotti.map((prodotto) => (
+      <div class="prodotto-anteprima">
+         <a href={`/prodotto/${prodotto.id}`}>
+            
+            <img 
+              src={`${prodotto.img_fronte}`} 
+              alt={prodotto.nome} 
+            />
+            
+            <h3>{prodotto.nome}</h3>
+         </a>
+         
+         <p>€ {prodotto.prezzo}</p>
+      </div>
+    ))}
+  </div>
+</BaseLayout>
