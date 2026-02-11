@@ -82,7 +82,100 @@
 
 .action-buttons {
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.action-buttons .cyber-btn {
+    position: relative;
+    min-width: 220px;
+    padding: 1.2rem 2rem;
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    overflow: hidden;
+    z-index: 1;
+    /* Clip Path per tagliare gli angoli (estetica sci-fi) */
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+}
+
+.action-buttons .cyber-btn:not(.warning) {
+    background: rgba(57, 255, 20, 0.05); /* Verde chiarissimo trasparente */
+    border: 1px solid var(--c-neon-green);
+    color: var(--c-neon-green);
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.1);
+}
+
+/* Effetto Swipe diagonale al passaggio del mouse */
+.action-buttons .cyber-btn:not(.warning)::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: var(--c-neon-green);
+    z-index: -1;
+    transition: transform 0.4s ease;
+    transform: skewX(-20deg);
+}
+
+.action-buttons .cyber-btn:not(.warning):hover {
+    color: var(--c-void); /* Testo nero su sfondo verde */
+    box-shadow: 0 0 30px rgba(57, 255, 20, 0.5), 
+                inset 0 0 10px rgba(0,0,0,0.5);
+    border-color: var(--c-neon-green);
+    text-shadow: none;
+    letter-spacing: 4px; /* Espande il testo per enfasi */
+}
+
+.action-buttons .cyber-btn:not(.warning):hover::before {
+    transform: skewX(-20deg) translate(200%, 0); /* Animazione swipe */
+    /* Nota: Usiamo background solido invece dello swipe per leggibilità */
+    background: var(--c-neon-green);
+    left: 0;
+    transform: skewX(0);
+}
+
+
+/* =========================================
+   2. PULSANTE SVUOTA (Il Pericolo)
+   ========================================= */
+.action-buttons .cyber-btn.warning {
+    background: transparent;
+    border: 1px solid #333; /* Molto scuro di base */
+    color: #666; /* Grigio spento (disincentivo al click) */
+    font-size: 0.9rem; /* Leggermente più piccolo */
+    min-width: 180px;
+}
+
+.action-buttons .cyber-btn.warning:hover {
+    border-color: #ff3939;
+    color: #fff;
+    background: repeating-linear-gradient(
+        45deg,
+        #ff3939,
+        #ff3939 10px,
+        #b30000 10px,
+        #b30000 20px
+    ); /* Effetto nastro segnaletico Hazard */
+    box-shadow: 0 0 20px #ff3939;
+    text-shadow: 0 2px 0 #000;
+}
+
+/* Responsive Mobile */
+@media (max-width: 768px) {
+    .action-buttons {
+        flex-direction: column-reverse; /* Checkout sopra, Svuota sotto */
+        width: 100%;
+        gap: 1rem;
+    }
+    
+    .action-buttons .cyber-btn {
+        width: 100%;
+        min-width: unset;
+    }
 }
 
 .empty-state {
